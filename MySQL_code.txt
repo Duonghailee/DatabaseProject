@@ -1,0 +1,283 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: mysql.metropolia.fi
+-- Generation Time: Dec 06, 2016 at 08:32 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `tienp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Category`
+--
+
+CREATE TABLE `Category` (
+  `Category_ID` int(11) NOT NULL,
+  `Category_type` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Category`
+--
+
+INSERT INTO `Category` (`Category_ID`, `Category_type`) VALUES
+(1, 'Tea'),
+(2, 'Coffee');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Inventory`
+--
+
+CREATE TABLE `Inventory` (
+  `INVENTORY_ID` int(11) NOT NULL,
+  `INVENTORY_NAME` varchar(100) NOT NULL,
+  `QUANTITY` float DEFAULT NULL,
+  `PRICE` float NOT NULL,
+  `Supplier_ID` int(11) NOT NULL,
+  `Category_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Inventory`
+--
+
+INSERT INTO `Inventory` (`INVENTORY_ID`, `INVENTORY_NAME`, `QUANTITY`, `PRICE`, `Supplier_ID`, `Category_ID`) VALUES
+(1, 'China Congou Mao Jia Green Tea ', 0.5, 11.5, 1, 1),
+(2, 'Caramel Cream Flavoured Black Tea ', 0.5, 14, 1, 1),
+(3, 'Coffee & Amaretto Rooibos Tea ', 0.5, 12, 1, 1),
+(4, 'Delicious Berry Fruit Tea ', 0.5, 13, 2, 1),
+(5, 'French Lavender Earl Grey ', 2, 15, 3, 1),
+(6, 'Genmaicha (a.k.a. Popcorn Tea) ', 1, 11, 2, 1),
+(8, 'Hojicha Japanese Roasted Green Tea', 1, 18, 2, 1),
+(9, 'Japan Sencha Green Tea ', 1, 16, 1, 1),
+(10, 'Jasmine Blossom Green Tea ', 2, 12, 2, 1),
+(11, 'Kaika Cherry Sencha Green Tea ', 2, 13, 3, 1),
+(17, 'Philips Senseo 108 x Cafe Rene CremÃ©', 1, 15, 4, 2),
+(18, 'Cafe Direct Fairtrade Medium Roast Coffee', 2, 20, 5, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Orders`
+--
+
+CREATE TABLE `Orders` (
+  `ORDER_ID` int(11) NOT NULL,
+  `PERSON_ID` int(11) NOT NULL,
+  `INVENTORY_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Orders`
+--
+
+INSERT INTO `Orders` (`ORDER_ID`, `PERSON_ID`, `INVENTORY_ID`) VALUES
+(1, 3, 1),
+(2, 3, 4),
+(3, 1, 2),
+(4, 2, 3),
+(5, 4, 5),
+(6, 3, 4),
+(7, 4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PERSONS`
+--
+
+CREATE TABLE `PERSONS` (
+  `PERSON_ID` int(11) NOT NULL,
+  `Person_Type` int(20) NOT NULL,
+  `PERSON_NAME` varchar(30) DEFAULT NULL,
+  `PERSON_ADDRESS` varchar(30) DEFAULT NULL,
+  `PERSON_EMAIL` varchar(30) NOT NULL,
+  `PERSON_ PHONENB` varchar(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `PERSONS`
+--
+
+INSERT INTO `PERSONS` (`PERSON_ID`, `Person_Type`, `PERSON_NAME`, `PERSON_ADDRESS`, `PERSON_EMAIL`, `PERSON_ PHONENB`) VALUES
+(1, 1, 'Timo Leinonen', 'Koskelantie 56 B 1', 'timoleino@gmail.com', '040000234'),
+(2, 3, 'Laura Nurminen', 'Antti Korpin Tie 4 c 3', 'habet@gmail.com', '045323451'),
+(3, 2, 'Markku Sola', 'HirmetsÃ¤ntie 94', 'helihu@gmail.com', '050433451'),
+(4, 2, 'Marja Leikki', 'Ruopankatu 1A4', 'nifagerit@gmail.com', '051312351'),
+(5, 1, 'Alexander Stubb', 'kuohujuja 6E83', 'alexstubb@gmail.com', '0403234511'),
+(6, 2, 'Saari Lahtinen', 'Sahratie 6, Vantaa', 'saari.lahtinen@gmail.com', '0431245655'),
+(7, 2, 'Hella Kasvinen', 'Kivirinne 8B', 'hella.kasvinen@yahoo.com', '0450675231'),
+(8, 1, 'Jarkko Merilainen', 'Savikuja 7A', 'Jarkko.52@gmail.com', '0544622331'),
+(9, 2, 'Mikko Karhu', 'Blomintie 5', 'mikko.karhu@gmail.com', '052462453'),
+(10, 2, 'Sankanri Luhta', 'Lehtikuja 5F', 'sankari.luhta@gmail.com', '0453456341');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Person_Type`
+--
+
+CREATE TABLE `Person_Type` (
+  `Person_Type` int(11) NOT NULL,
+  `Type_Name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Person_Type`
+--
+
+INSERT INTO `Person_Type` (`Person_Type`, `Type_Name`) VALUES
+(3, 'Both Buyer and Subscriber'),
+(1, 'Buyer'),
+(2, 'Newsletter Subscriber');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Suppliers`
+--
+
+CREATE TABLE `Suppliers` (
+  `Supplier_ID` int(11) NOT NULL,
+  `Supplier_Name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Suppliers`
+--
+
+INSERT INTO `Suppliers` (`Supplier_ID`, `Supplier_Name`) VALUES
+(1, 'Jenier World of Teas'),
+(2, 'Tetley'),
+(3, 'Yorkshire'),
+(4, 'Philips Senseo '),
+(5, 'Taylors of Harrogate');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Category`
+--
+ALTER TABLE `Category`
+  ADD PRIMARY KEY (`Category_ID`);
+
+--
+-- Indexes for table `Inventory`
+--
+ALTER TABLE `Inventory`
+  ADD PRIMARY KEY (`INVENTORY_ID`),
+  ADD KEY `Supplier_ID` (`Supplier_ID`),
+  ADD KEY `Category_ID` (`Category_ID`);
+
+--
+-- Indexes for table `Orders`
+--
+ALTER TABLE `Orders`
+  ADD PRIMARY KEY (`ORDER_ID`),
+  ADD KEY `CUSTOMER_ID` (`PERSON_ID`),
+  ADD KEY `INVENTORY_ID` (`INVENTORY_ID`);
+
+--
+-- Indexes for table `PERSONS`
+--
+ALTER TABLE `PERSONS`
+  ADD PRIMARY KEY (`PERSON_ID`),
+  ADD KEY `Person_Type` (`Person_Type`);
+
+--
+-- Indexes for table `Person_Type`
+--
+ALTER TABLE `Person_Type`
+  ADD PRIMARY KEY (`Person_Type`),
+  ADD KEY `Subsriber_ID` (`Type_Name`),
+  ADD KEY `Subsriber_ID_2` (`Type_Name`),
+  ADD KEY `Subsriber_ID_3` (`Type_Name`),
+  ADD KEY `Subsriber_ID_4` (`Type_Name`),
+  ADD KEY `PERSON_ID` (`Person_Type`);
+
+--
+-- Indexes for table `Suppliers`
+--
+ALTER TABLE `Suppliers`
+  ADD PRIMARY KEY (`Supplier_ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Category`
+--
+ALTER TABLE `Category`
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `Inventory`
+--
+ALTER TABLE `Inventory`
+  MODIFY `INVENTORY_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT for table `Orders`
+--
+ALTER TABLE `Orders`
+  MODIFY `ORDER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `PERSONS`
+--
+ALTER TABLE `PERSONS`
+  MODIFY `PERSON_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `Person_Type`
+--
+ALTER TABLE `Person_Type`
+  MODIFY `Person_Type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `Suppliers`
+--
+ALTER TABLE `Suppliers`
+  MODIFY `Supplier_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `Inventory`
+--
+ALTER TABLE `Inventory`
+  ADD CONSTRAINT `Inventory_ibfk_1` FOREIGN KEY (`Supplier_ID`) REFERENCES `Suppliers` (`Supplier_ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `Inventory_ibfk_2` FOREIGN KEY (`Category_ID`) REFERENCES `Category` (`Category_ID`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Orders`
+--
+ALTER TABLE `Orders`
+  ADD CONSTRAINT `Orders_ibfk_2` FOREIGN KEY (`INVENTORY_ID`) REFERENCES `Inventory` (`INVENTORY_ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `Orders_ibfk_3` FOREIGN KEY (`PERSON_ID`) REFERENCES `PERSONS` (`PERSON_ID`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `PERSONS`
+--
+ALTER TABLE `PERSONS`
+  ADD CONSTRAINT `PERSONS_ibfk_1` FOREIGN KEY (`Person_Type`) REFERENCES `Person_Type` (`Person_Type`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
