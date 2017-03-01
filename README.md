@@ -4,6 +4,6 @@
 - Using PhpMyAdmin and MySQL
 <br>
 
-![ScreenShot](https://gfycat.com/SandyFlippantBlackcrappie)
+![ScreenShot](https://cloud.githubusercontent.com/assets/25751050/23475592/c1da8482-fec0-11e6-91e6-8b9fa44244a7.gif)
 
 ![ScreenShot](https://cloud.githubusercontent.com/assets/25751050/23474942/4d692b8c-febe-11e6-89a2-b4f514158006.png)
