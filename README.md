@@ -1,6 +1,6 @@
 <h1> Relational database project </h1>
 
-- Create a working database for La Tee Box, a tea and coffee delivery startup company in Helsinki.
+- Create a working database for La Tee Box, a coffee delivery startup company in Helsinki.
 - Using PhpMyAdmin and MySQL
 <br>
 
